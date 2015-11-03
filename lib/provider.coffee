@@ -61,10 +61,11 @@ module.exports =
     # console.log "DBG::getKeywordSelectorPrefix[line]: " + line
     keywordSelectorPrefixPattern.exec(line)?[1]
 
-  buildKeywordCompletion: (keyword, {type, snippet, displayText, description, docAnchor, leftLabel}) ->
+  buildKeywordCompletion: (keyword, {type, snippet, displayText, description, docAnchor, leftLabel, rightLabel}) ->
     # console.log "DBG::buildKeywordCompletion[snippetLength]: " + snippet.length
     # console.log "DBG::buildKeywordCompletion[displayText]: " + displayText
-    console.log "DBG::buildKeywordCompletion[leftLabel]: " + leftLabel
+    # console.log "DBG::buildKeywordCompletion[leftLabel]: " + leftLabel
+    # console.log "DBG::buildKeywordCompletion[rightLabel]: " + rightLabel
     completion =
       type: type
       description: description
@@ -75,6 +76,9 @@ module.exports =
 
     if leftLabel?.length
       completion.leftLabel = leftLabel
+
+    if rightLabel?.length
+      completion.rightLabel = rightLabel
 
     if snippet?.length
       completion.snippet = snippet
