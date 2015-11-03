@@ -1,0 +1,3 @@
+'.source.awk':
+  'editor':
+    'commentStart': '# '
