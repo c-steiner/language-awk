@@ -14,9 +14,7 @@ module.exports =
     scopes = request.scopeDescriptor.getScopesArray()
 
     if @isCompletingKeywordSelector(request)
-      # console.log "DBG::getSuggestions[request]: " + request
       keywordCompletions = @getKeywordCompletions(request)
-      # console.log "DBG::getSuggestions[completionsLength]: " + keywordCompletions.length
       if keywordCompletions?.length
         completions ?= []
         completions = completions.concat(keywordCompletions)
@@ -36,36 +34,23 @@ module.exports =
       return
 
   isCompletingKeywordSelector: ({editor, scopeDescriptor, bufferPosition}) ->
-    # console.log "DBG::isCompletingKeywordSelector[scopeDesc]: " + scopeDescriptor
-    # console.log "DBG::isCompletingKeywordSelector[editor]: " + editor
-    # console.log "DBG::isCompletingKeywordSelector[bufferPos]: " + bufferPosition
     scopes = scopeDescriptor.getScopesArray()
     keywordSelectorPrefix = @getKeywordSelectorPrefix(editor, bufferPosition)
-    # console.log "DBG::isCompletingKeywordSelector[prefix]: " + keywordSelectorPrefix
     return false unless keywordSelectorPrefix?.length
 
     true
 
   getKeywordCompletions: ({bufferPosition, editor, prefix}) ->
-    # console.log "DBG::getKeywordCompletions[bufferPos] " + bufferPosition
-    # console.log "DBG::getKeywordCompletions[prefix] " + prefix
     completions = []
     for keyword, options of @keywords when firstCharsEqual(keyword, prefix)
-      # console.log "DBG::getKeywordCompletions[keyword] " + keyword
-      # console.log "DBG::getKeywordCompletions[options] " + options
       completions.push(@buildKeywordCompletion(keyword, options))
     completions
 
   getKeywordSelectorPrefix: (editor, bufferPosition) ->
     line = editor.getTextInRange([[bufferPosition.row, 0], bufferPosition])
-    # console.log "DBG::getKeywordSelectorPrefix[line]: " + line
     keywordSelectorPrefixPattern.exec(line)?[1]
 
   buildKeywordCompletion: (keyword, {type, snippet, displayText, description, docAnchor, leftLabel, rightLabel}) ->
-    # console.log "DBG::buildKeywordCompletion[snippetLength]: " + snippet.length
-    # console.log "DBG::buildKeywordCompletion[displayText]: " + displayText
-    # console.log "DBG::buildKeywordCompletion[leftLabel]: " + leftLabel
-    # console.log "DBG::buildKeywordCompletion[rightLabel]: " + rightLabel
     completion =
       type: type
       description: description
