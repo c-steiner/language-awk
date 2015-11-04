@@ -4,22 +4,22 @@
   'gawk'
 ]
 'name': 'AWK-Script'
-'firstLineMatch': '#!.*\\b(awk|gawk)'
+'firstLineMatch': '#!.*\\b(awk|gawk)\\b'
 'patterns': [
   {
-    'include': '#comment'
+    'include': '#line_comment'
   }
   {
     'include': '#builtin_functions'
   }
   {
-    'include': '#builtin_variables'
+    'include': '#function_definition'
   }
   {
-    'include': '#builtin_constants'
+    'include': '#variable_language'
   }
   {
-    'include': '#function-definition'
+    'include': '#constant_language'
   }
   {
     'include': '#keyword'
@@ -31,12 +31,21 @@
     'include': '#string'
   }
   {
-    'include': '#variable'
+    'match': '\\b(&&|\\|\\|)\\b'
+    'name': 'keyword.operator.awk'
+  }
+  {
+    'match': '\\b([1-9]+[0-9]*|0)'
+    'name': 'constant.numeric.awk'
+  }
+  {
+    'match': "[=|:]"
+    'name': 'punctuation.separator'
   }
 ]
 'repository':
-  'comment':
-      'begin': '(^[ \\t]+)?(?<!\\S)(?=#)(?!#\\{)'
+  'line_comment':
+      'begin': '(^[ \\t]+)?(?=#)'
       'beginCaptures':
         '1':
           'name': 'punctuation.whitespace.comment.leading.awk'
@@ -54,190 +63,133 @@
   'builtin_functions':
     'patterns': [\
       {
-        'match': '\\b(?:atan2|cos|exp|int|log|rand|sin|sqrt|srand|asort|asorti|gensub|gsub|index|length|match|patsplit|split|sprintf|strtonum|sub|substr|tolower|toupper|close|fflush|system|mktime|strftime|systime|and|compl|lshift|or|rshift|xor|isarray|bindtextdomain|dcgettext|dcngettext|print|getline)\\b'
+        'match': '\\b(atan2|cos|exp|int|log|rand|sin|sqrt|srand|asort|asorti|gensub|gsub|index|length|match|patsplit|split|sprintf|strtonum|sub|substr|tolower|toupper|close|fflush|system|mktime|strftime|systime|and|compl|lshift|or|rshift|xor|isarray|bindtextdomain|dcgettext|dcngettext|print)\\b'
         'name': 'support.function.builtin.awk'
       }
     ]
   'keyword':
-    'match': '\\b(if|for|else|next|in|return|while|do|switch|case|default|break|continue|nextfile|exit)\\b'
+    'match': '\\b(BEGIN|END|if|for|else|next|in|return|while|do|switch|case|default|break|continue|nextfile|exit)\\b'
     'name': 'keyword.control.awk'
-  'builtin_constants':
-    'patterns': [
-      'match': '\\b(BEGIN|END)\\b'
-      'name': 'support.constant.awk'
-    ]
-  'builtin_variables':
-    'patterns': [
-      'match': '\\b(PREC|ROUNDMODE|TEXTDOMAIN|FPAT|BINMODE|FIELDWIDTHS|CONVFMT|FS|OFMT|OFS|ORS|RS|SUBSEP|ARGC|ARGV|ENVIRON|FILENAME|FNR|NF|NR|RLENGTH|RSTART|IGNORECASE|LINT|ARGIND|ERRNO|PROCINFO|RT|FUNCTAB|SYMTAB)\\b'
-      'name': 'variable.language.awk'
-    ]
-  'function-definition':
+  'variable_language':
     'patterns': [
       {
-        'begin': '\\b(function)\\s+([^\\s\\\\]+)(?:\\s*(\\(\\)))?'
+        'match': '\\b(BINMODE|CONVFMT|FIELDWIDTHS|FPAT|FS|IGNORECASE|LINT|OFMT|OFS|ORS|PREC|ROUNDMODE|RS|SUBSEP|TEXTDOMAIN)\\b'
+        'name': 'variable.language.awk'
+      }
+      {
+        'captures':
+          '1':
+            'name': 'punctuation.definition.variable.awk'
+        'match': '(\\$)([0-9])'
+        'name': 'variable.language.awk'
+      }
+    ]
+  'function_definition':
+    'patterns': [
+      {
+        'begin': '\\b(function)\\b\\s+([a-zA-Z0-9_]+)(\\(.*\\))?'
         'beginCaptures':
           '1':
             'name': 'storage.type.function.awk'
           '2':
             'name': 'entity.name.function.awk'
           '3':
-            'name': 'punctuation.definition.arguments.awk'
+            'name': 'variable.parameter.awk'
         'end': ';|&|$'
         'endCaptures':
           '0':
             'name': 'punctuation.definition.function.awk'
         'name': 'meta.function.awk'
-        'patterns': [
-          {
-            'include': '$self'
-          }
-        ]
       }
+    ]
+  'operator':
+    'patterns': [
       {
-        'begin': '\\b([^\\s\\\\=]+)\\s*(\\(\\))'
-        'beginCaptures':
-          '1':
-            'name': 'entity.name.function.awk'
-          '2':
-            'name': 'punctuation.definition.arguments.awk'
-        'end': ';|&|$'
-        'endCaptures':
-          '0':
-            'name': 'punctuation.definition.function.awk'
-        'name': 'meta.function.awk'
-        'patterns': [
-          {
-            'include': '$self'
-          }
-        ]
+        'match': '<\\=|>\\=|\\=\\=|<|>|\\!\\='
+        'name': 'keyword.operator.comparison.awk'
+      }
+    ]
+  'constant_language':
+    'patterns': [
+      {
+        'match': "\\b(ARGV|ARGC|ENVIRON|ERRNO|FILENAME|FNR|FUNCTAB|NF|NR|PROCINFO|RLENGTH|RSTART|RT|SYMTAB)\\b"
+        'name': 'constant.language.awk'
       }
     ]
   'string':
     'patterns': [
       {
-        'match': '\\\\.'
-        'name': 'constant.character.escape.awk'
-      }
-      {
-        'begin': '\''
-        'beginCaptures':
-          '0':
-            'name': 'punctuation.definition.string.begin.awk'
-        'end': '\''
-        'endCaptures':
-          '0':
-            'name': 'punctuation.definition.string.end.awk'
-        'name': 'string.quoted.single.awk'
-      }
-      {
-        'begin': '\\$?"'
-        'beginCaptures':
-          '0':
-            'name': 'punctuation.definition.string.begin.awk'
-        'end': '"'
-        'endCaptures':
-          '0':
-            'name': 'punctuation.definition.string.end.awk'
+        'begin': "\""
+        'end': "\""
         'name': 'string.quoted.double.awk'
         'patterns': [
           {
-            'match': '\\\\[\\$`"\\\\\\n]'
+            'match': "\\\\."
             'name': 'constant.character.escape.awk'
           }
-          {
-            'include': '#variable'
-          }
-        #   {
-        #     'include': '#interpolation'
-        #   }
         ]
       }
+      {
+        'begin': "\'"
+        'end': "\'"
+        'name': 'string.quoted.single.awk'
+        'patterns': [
+          {
+            'match': "\\\\."
+            'name': 'constant.character.escape.awk'
+          }
+        ]
+      }
+    ]
+# 'variable':
+  #   'patterns': [
       # {
-      #   'begin': '\\$\''
-      #   'beginCaptures':
-      #     '0':
-      #       'name': 'punctuation.definition.string.begin.awk'
-      #   'end': '\''
-      #   'endCaptures':
-      #     '0':
-      #       'name': 'punctuation.definition.string.end.awk'
-      #   'name': 'string.quoted.single.dollar.awk'
-      #   # 'patterns': [
-      #   #   {
-      #   #     'match': '\\\\(a|b|e|f|n|r|t|v|\\\\|\')'
-      #   #     'name': 'constant.character.escape.ansi-c.awk'
-      #   #   }
-      #   #   {
-      #   #     'match': '\\\\[0-9]{3}'
-      #   #     'name': 'constant.character.escape.octal.awk'
-      #   #   }
-      #   #   {
-      #   #     'match': '\\\\x[0-9a-fA-F]{2}'
-      #   #     'name': 'constant.character.escape.hex.awk'
-      #   #   }
-      #   #   {
-      #   #     'match': '\\\\c.'
-      #   #     'name': 'constant.character.escape.control-char.awk'
-      #   #   }
-      #   # ]
+      #   'captures':
+      #     '1':
+      #       'name': 'punctuation.definition.variable.awk'
+      #   'match': '(\\$)&(?![A-Za-z0-9_])'
+      #   'name': 'variable.other.regexp.match.awk'
       # }
-    ]
-  'operator':
-    'patterns': [
-      {
-        'match': '(==|<=|>=|!=)'
-        'name': 'keyword.operator.comparsion.awk'
-      }
-    ]
-  'variable':
-    'patterns': [
-      {
-        'captures':
-          '1':
-            'name': 'punctuation.definition.variable.awk'
-        'match': '(\\$)&(?![A-Za-z0-9_])'
-        'name': 'variable.other.regexp.match.awk'
-      }
-      {
-        'captures':
-          '1':
-            'name': 'punctuation.definition.variable.awk'
-        'match': '(\\$)`(?![A-Za-z0-9_])'
-        'name': 'variable.other.regexp.pre-match.awk'
-      }
-      {
-        'captures':
-          '1':
-            'name': 'punctuation.definition.variable.awk'
-        'match': '(\\$)\'(?![A-Za-z0-9_])'
-        'name': 'variable.other.regexp.post-match.awk'
-      }
-      {
-        'captures':
-          '1':
-            'name': 'punctuation.definition.variable.awk'
-        'match': '(\\$)\\+(?![A-Za-z0-9_])'
-        'name': 'variable.other.regexp.last-paren-match.awk'
-      }
-      {
-        'captures':
-          '1':
-            'name': 'punctuation.definition.variable.awk'
-        'match': '(\\$)0(?![A-Za-z0-9_])'
-        'name': 'variable.other.predefined.program-name.awk'
-      }
-      {
-        'captures':
-          '1':
-            'name': 'punctuation.definition.variable.awk'
-        'match': '(\\$)[_ab\\*\\.\\/\\|,\\\\;#%=\\-~^:?!\\$<>\\(\\)\\[\\]@](?![A-Za-z0-9_])'
-        'name': 'variable.other.predefined.awk'
-      }
-      {
-        'captures':
-          '1':
-            'name': 'punctuation.definition.variable.awk'
-        'match': '(\\$)[0-9]+(?![A-Za-z0-9_])'
-        'name': 'variable.other.subpattern.awk'
-      }
-    ]
+      # {
+      #   'captures':
+      #     '1':
+      #       'name': 'punctuation.definition.variable.awk'
+      #   'match': '(\\$)`(?![A-Za-z0-9_])'
+      #   'name': 'variable.other.regexp.pre-match.awk'
+      # }
+      # {
+      #   'captures':
+      #     '1':
+      #       'name': 'punctuation.definition.variable.awk'
+      #   'match': '(\\$)\'(?![A-Za-z0-9_])'
+      #   'name': 'variable.other.regexp.post-match.awk'
+      # }
+      # {
+      #   'captures':
+      #     '1':
+      #       'name': 'punctuation.definition.variable.awk'
+      #   'match': '(\\$)\\+(?![A-Za-z0-9_])'
+      #   'name': 'variable.other.regexp.last-paren-match.awk'
+      # }
+      # {
+      #   'captures':
+      #     '1':
+      #       'name': 'punctuation.definition.variable.awk'
+      #   'match': '(\\$)([0-9])'
+      #   'name': 'variable.language.awk'
+      # }
+      # {
+      #   'captures':
+      #     '1':
+      #       'name': 'punctuation.definition.variable.awk'
+      #   'match': '(\\$)[_ab\\*\\.\\/\\|,\\\\;#%=\\-~^:?!\\$<>\\(\\)\\[\\]@](?![A-Za-z0-9_])'
+      #   'name': 'variable.other.predefined.awk'
+      # }
+      # {
+      #   'captures':
+      #     '1':
+      #       'name': 'punctuation.definition.variable.awk'
+      #   'match': '(\\$)[0-9]+(?![A-Za-z0-9_])'
+      #   'name': 'variable.other.subpattern.awk'
+      # }
+    # ]
