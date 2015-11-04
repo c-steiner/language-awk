@@ -1,19 +1,11 @@
 {
   "name": "language-awk",
-  "main": "./lib/main",
   "version": "0.0.0",
-  "description": "AWK language support in Atom (including autocomplete).",
+  "description": "AWK language support in Atom.",
   "repository": "https://github.com/c-steiner/language-awk.git",
   "license": "MIT",
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
-  },
-  "providedServices": {
-      "autocomplete.provider": {
-          "versions": {
-              "2.0.0": "getProvider"
-          }
-      }
   },
   "dependencies": {
   }
