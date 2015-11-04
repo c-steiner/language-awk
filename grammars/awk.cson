@@ -31,6 +31,9 @@
     'include': '#string'
   }
   {
+    'include': '#variable'
+  }
+  {
     'match': '\\b(&&|\\|\\|)\\b'
     'name': 'keyword.operator.awk'
   }
@@ -61,15 +64,23 @@
         }
       ]
   'builtin_functions':
-    'patterns': [\
+    'patterns': [
       {
         'match': '\\b(atan2|cos|exp|int|log|rand|sin|sqrt|srand|asort|asorti|gensub|gsub|index|length|match|patsplit|split|sprintf|strtonum|sub|substr|tolower|toupper|close|fflush|system|mktime|strftime|systime|and|compl|lshift|or|rshift|xor|isarray|bindtextdomain|dcgettext|dcngettext|print)\\b'
         'name': 'support.function.builtin.awk'
       }
     ]
   'keyword':
-    'match': '\\b(BEGIN|END|if|for|else|next|in|return|while|do|switch|case|default|break|continue|nextfile|exit)\\b'
-    'name': 'keyword.control.awk'
+    'patterns': [
+      {
+        'match': '\\b(BEGIN|END|if|for|else|next|in|return|while|do|switch|case|default|break|continue|nextfile|exit)\\b'
+        'name': 'keyword.control.awk'
+      }
+      {
+        'match': '/.*/'
+        'name': 'string.regexp.awk'
+      }
+    ]
   'variable_language':
     'patterns': [
       {
@@ -114,6 +125,13 @@
       {
         'match': "\\b(ARGV|ARGC|ENVIRON|ERRNO|FILENAME|FNR|FUNCTAB|NF|NR|PROCINFO|RLENGTH|RSTART|RT|SYMTAB)\\b"
         'name': 'constant.language.awk'
+      }
+    ]
+  'variable':
+    'patterns': [
+      {
+        'match': '[a-zA-Z0-9_]+\\[[a-zA-Z0-9]\\]'
+        'name': 'variable.other.awk'
       }
     ]
   'string':

@@ -24,3 +24,8 @@ describe "LanguageAwk", ->
     expect(tokens[1]).toEqual value: ' ', scopes: ['source.awk', 'meta.function.awk']
     expect(tokens[2]).toEqual value: 'foobar', scopes: ['source.awk', 'meta.function.awk', 'entity.name.function.awk']
     expect(tokens[3]).toEqual value: '(param)', scopes: ['source.awk', 'meta.function.awk', 'variable.parameter.awk']
+
+  it "tokensizes array", ->
+    {tokens} = grammar.tokenizeLine("arr[0]")
+
+    expect(tokens[0]).toEqual value: 'arr[0]', scopes: ['source.awk', 'variable.other.awk']
