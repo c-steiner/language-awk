@@ -28,15 +28,8 @@
             return
         }
     """
-  'if (condition)':
-    'prefix': 'if'
-    'body': """
-        if (${1:condition}) {
-            ${2:# do something}
-        }
-    """
   'if-else':
-    'prefix': 'if ('
+    'prefix': 'if'
     'body': """
         if (${1:condition}) {
             ${2:# do something}
