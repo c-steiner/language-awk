@@ -3,6 +3,11 @@
   "version": "0.1.1",
   "description": "AWK language support in Atom.",
   "repository": "https://github.com/c-steiner/language-awk.git",
+  "keywords": [
+    "language",
+    "awk",
+    "grammar"
+  ],
   "license": "MIT",
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
