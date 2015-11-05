@@ -15,6 +15,9 @@
   {
     'include': '#function_definition'
   }
+  # {
+  #   'include': '#userdefined_function'
+  # }
   {
     'include': '#variable_language'
   }
@@ -28,7 +31,13 @@
     'include': '#operator'
   }
   {
+    'include': '#regexp'
+  }
+  {
     'include': '#string'
+  }
+  {
+    'include': '#numeric'
   }
   {
     'include': '#variable'
@@ -36,10 +45,6 @@
   {
     'match': '\\b(&&|\\|\\|)\\b'
     'name': 'keyword.operator.awk'
-  }
-  {
-    'match': '\\b([1-9]+[0-9]*|0)'
-    'name': 'constant.numeric.awk'
   }
   {
     'match': "[=|:]"
@@ -76,9 +81,29 @@
         'match': '\\b(BEGIN|END|if|for|else|next|in|return|while|do|switch|case|default|break|continue|nextfile|exit)\\b'
         'name': 'keyword.control.awk'
       }
+    ]
+  'regexp':
+    'patterns': [
       {
-        'match': '/.*/'
         'name': 'string.regexp.awk'
+        'match': '(/)(.*?)(/)'
+        'captures':
+          '1':
+            'name': 'string.regexp.awk'
+          '2':
+            'patterns': [
+              {
+                'include': '#regexp_specialcharacters'
+              }
+              {
+                'include': '#numeric'
+              }
+              {
+                'include': '#character_classes'
+              }
+            ]
+          '3':
+            'name': 'string.regexp.awk'
       }
     ]
   'variable_language':
@@ -88,17 +113,14 @@
         'name': 'variable.language.awk'
       }
       {
-        'captures':
-          '1':
-            'name': 'punctuation.definition.variable.awk'
-        'match': '(\\$)([0-9])'
-        'name': 'variable.language.awk'
+        'match': '\\$[0-9]'
+        'name': 'constant.language.awk'
       }
     ]
   'function_definition':
     'patterns': [
       {
-        'begin': '\\b(function)\\b\\s+([a-zA-Z0-9_]+)(\\(.*\\))?'
+        'begin': '^(function)\\s+([[:alnum:]_]+)\\(([[:alnum:]_]+)\\)?'
         'beginCaptures':
           '1':
             'name': 'storage.type.function.awk'
@@ -113,6 +135,14 @@
         'name': 'meta.function.awk'
       }
     ]
+  # 'userdefined_function':
+  #   'patterns': [
+  #     {
+  #       'name': 'entity.name.function.awk'
+  #       'begin': '[[:alnum:]]+\\('
+  #       'end': '\\)'
+  #     }
+  #   ]
   'operator':
     'patterns': [
       {
@@ -130,8 +160,25 @@
   'variable':
     'patterns': [
       {
-        'match': '[a-zA-Z0-9_]+\\[[a-zA-Z0-9]\\]'
         'name': 'variable.other.awk'
+        'match': '[[:alnum:]_]+\\[(.+?)\\]'
+        'captures':
+          '1':
+            'patterns': [
+              {
+                'include': '#numeric'
+              }
+              {
+                'include': '#variable_language'
+              }
+            ]
+      }
+    ]
+  'numeric':
+    'patterns': [
+      {
+        'match': '\\b([1-9]+[0-9]*|0)'
+        'name': 'constant.numeric.awk'
       }
     ]
   'string':
@@ -158,4 +205,16 @@
           }
         ]
       }
+    ]
+  'regexp_specialcharacters':
+    'patterns': [
+      {
+        'name': 'constant.character.awk'
+        'match': '(\\^|\\.|\\+|\\*|\\?|\\$)'
+      }
+    ]
+  'character_classes':
+    'patterns': [
+      'match': "\\[:(alnum|alpha|blank|cntrl|digit|graph|lower|print|punct|space|upper|xdigit):\\]"
+      'name': 'support.class.awk'
     ]

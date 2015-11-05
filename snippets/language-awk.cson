@@ -1,17 +1,4 @@
 '.source.awk':
-  'gsub(regexp, replacement, target)':
-    'prefix': 'gsub'
-    'body': 'gsub(/${1:regex}/, "${2:replacement}", ${3:target})'
-  'sub(regexp, replacement, target)':
-    'prefix': 'sub'
-    'body': 'sub(/${1:regex}/, "${2:replacement}", ${3:target})'
-  'for-loop':
-    'prefix': 'for (init, cond, incr)'
-    'body': """
-        for (${1:initialization}; ${2:condition}; ${3:increment}) {
-            ${4:# do something}
-        }
-    """
   'for-each':
     'prefix': 'for (i in array)'
     'body': """
@@ -38,9 +25,3 @@
             ${3:# do something other}
         }
     """
-  'split(string, array, fieldsep)':
-    'prefix': 'split'
-    'body': 'split(${1:string}, ${2:array}, ${3:fieldsep})'
-  'substr(string, start, length)':
-    'prefix': 'substr'
-    'body': 'substr(${1:string}, ${2:start}, ${3:length})'
