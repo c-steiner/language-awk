@@ -10,6 +10,9 @@
     'include': '#line_comment'
   }
   {
+    'include': '#action'
+  }
+  {
     'include': '#builtin_functions'
   }
   {
@@ -68,6 +71,27 @@
           'name': 'comment.line.number-sign.awk'
         }
       ]
+  'action':
+    {
+      'name': 'entity.name.action.awk'
+      'begin': '^(BEGIN|END|/.+/) (\{)|^(\{)'
+      'beginCaptures':
+        '1':
+          'name': 'keyword.control.awk'
+        '2':
+          'name': 'entity.name.action.begin.awk'
+        '3':
+          'name': 'entity.name.action.begin.awk'
+      'end': '^\}'
+      'endCaptures':
+        '0':
+          'name': 'entity.name.action.end.awk'
+      'patterns': [
+        {
+          'include': '$self'
+        }
+      ]
+  }
   'builtin_functions':
     'patterns': [
       {
