@@ -9,6 +9,9 @@
     "grammar"
   ],
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/c-steiner/language-awk/issues"
+  },
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
   },

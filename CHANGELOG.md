@@ -1,9 +1,15 @@
-## 0.1.2 - First Release
+## 0.1.3
+* Add more tests.
+* Improve matching structure.
+* Fix some package settings.
+
+
+## 0.1.2
 * Improved matching structure (use entities).
 * Fixed snippets.
 
 
-## 0.1.1 - First Release
+## 0.1.1
 * Improved syntax matching on /regexp/ and arrays[].
 * Removed snippets which are provided by autocomplete+.
 

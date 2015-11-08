@@ -33,3 +33,20 @@ describe "LanguageAwk", ->
     expect(tokens[0]).toEqual value: 'arr[', scopes: ['source.awk', 'variable.other.awk']
     expect(tokens[1]).toEqual value: '0', scopes: ['source.awk', 'variable.other.awk', 'constant.numeric.awk']
     expect(tokens[2]).toEqual value: ']', scopes: ['source.awk', 'variable.other.awk']
+
+  it "tokensizes regexp", ->
+    {tokens} = grammar.tokenizeLine('sub(/^[[:alpha:]]+/, "")')
+
+    expect(tokens[0]).toEqual value: 'sub', scopes: ['source.awk', 'support.function.builtin.awk']
+    expect(tokens[1]).toEqual value: '(', scopes: ['source.awk']
+    expect(tokens[2]).toEqual value: '/', scopes: ['source.awk', 'string.regexp.awk', 'string.regexp.begin.awk']
+    expect(tokens[3]).toEqual value: '^', scopes: ['source.awk', 'string.regexp.awk', 'constant.character.awk']
+    expect(tokens[4]).toEqual value: '[', scopes: ['source.awk', 'string.regexp.awk']
+    expect(tokens[5]).toEqual value: '[:alpha:]', scopes: ['source.awk', 'string.regexp.awk', 'support.class.awk']
+    expect(tokens[6]).toEqual value: ']', scopes: ['source.awk', 'string.regexp.awk']
+    expect(tokens[7]).toEqual value: '+', scopes: ['source.awk', 'string.regexp.awk', 'constant.character.awk']
+    expect(tokens[8]).toEqual value: '/', scopes: ['source.awk', 'string.regexp.awk', 'string.regexp.end.awk']
+    expect(tokens[9]).toEqual value: ', ', scopes: ['source.awk']
+    expect(tokens[10]).toEqual value: '"', scopes: ['source.awk', 'string.quoted.double.awk']
+    expect(tokens[11]).toEqual value: '"', scopes: ['source.awk', 'string.quoted.double.awk']
+    expect(tokens[12]).toEqual value: ')', scopes: ['source.awk']
