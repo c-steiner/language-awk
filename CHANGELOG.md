@@ -1,5 +1,6 @@
 ## 0.1.4
 * Improve regex matching.
+* Remove unused code.
 
 
 ## 0.1.3
