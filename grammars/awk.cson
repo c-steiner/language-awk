@@ -18,9 +18,6 @@
   {
     'include': '#function_definition'
   }
-  # {
-  #   'include': '#userdefined_function'
-  # }
   {
     'include': '#variable_language'
   }
@@ -56,10 +53,10 @@
 ]
 'repository':
   'line_comment':
-      'begin': '(^[ \\t]+)?(?=#)'
-      'beginCaptures':
-        '1':
-          'name': 'punctuation.whitespace.comment.leading.awk'
+    'begin': '(^[ \\t]+)?(?=#)'
+    'beginCaptures':
+      '1':
+        'name': 'punctuation.whitespace.comment.leading.awk'
       'end': '(?!\\G)'
       'patterns': [
         {
@@ -159,14 +156,6 @@
         'name': 'meta.function.awk'
       }
     ]
-  # 'userdefined_function':
-  #   'patterns': [
-  #     {
-  #       'name': 'entity.name.function.awk'
-  #       'begin': '[[:alnum:]]+\\('
-  #       'end': '\\)'
-  #     }
-  #   ]
   'operator':
     'patterns': [
       {
