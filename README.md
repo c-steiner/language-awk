@@ -1,5 +1,5 @@
 # AWK-Script language support in Atom
-[![apm](https://img.shields.io/apm/l/icon-fonts.svg?style=flat-square)](https://atom.io/packages/language-awk)
+[![apm](https://img.shields.io/apm/l/icon-fonts.svg?style=flat)](https://atom.io/packages/language-awk)
 
 Adds syntax highlighting to awk scripts in Atom.
 

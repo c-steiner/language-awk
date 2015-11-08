@@ -122,6 +122,10 @@
               {
                 'include': '#character_classes'
               }
+              {
+                'match': '(\\\\.)'
+                'name': 'constant.character.escape.awk'
+              }
             ]
           '3':
             'name': 'string.regexp.end.awk'
@@ -190,30 +194,30 @@
   'numeric':
     'patterns': [
       {
-        'match': '\\b([1-9]+[0-9]*|0)'
+        'match': '[[:digit:]]+(\.[[:digit:]]+)*'
         'name': 'constant.numeric.awk'
       }
     ]
   'string':
     'patterns': [
       {
-        'begin': "\""
-        'end': "\""
+        'begin': '"'
+        'end': '"'
         'name': 'string.quoted.double.awk'
         'patterns': [
           {
-            'match': "\\\\."
+            'match': '\\\\.'
             'name': 'constant.character.escape.awk'
           }
         ]
       }
       {
-        'begin': "\'"
-        'end': "\'"
+        'begin': '\''
+        'end': '\''
         'name': 'string.quoted.single.awk'
         'patterns': [
           {
-            'match': "\\\\."
+            'match': '\\\\.'
             'name': 'constant.character.escape.awk'
           }
         ]
@@ -222,12 +226,41 @@
   'regexp_specialcharacters':
     'patterns': [
       {
-        'name': 'constant.character.awk'
-        'match': '(\\^|\\.|\\+|\\*|\\?|\\$)'
+        'name': 'keyword.other.awk'
+        'match': '\\^|\\.|\\+|\\*|\\?|\\$|\\\\[abfnrtv]|\\\\"'
+      }
+      {
+        'name': 'keyword.other.awk'
+        'begin': '(\\[|\\{)'
+        'beginCaptures':
+          '1':
+            'name': 'punctuation.keyword.other.begin.awk'
+        'end': '(\\]|\\})'
+        'endCaptures':
+          '1':
+            'name': 'punctuation.keyword.other.end.awk'
+        'patterns': [
+          {
+            'include': '#character_classes'
+          }
+          {
+            'include': '#numeric'
+          }
+        ]
+      }
+      {
+        'name': 'constant.numeric.awk'
+        'match': '\\\\[[:digit:]]{1,3}|\\\\x[0-9a-fA-F]{2}'
       }
     ]
   'character_classes':
     'patterns': [
-      'match': "\\[:(alnum|alpha|blank|cntrl|digit|graph|lower|print|punct|space|upper|xdigit):\\]"
-      'name': 'support.class.awk'
+      {
+        'match': '\\[:(alnum|alpha|blank|cntrl|digit|graph|lower|print|punct|space|upper|xdigit):\\]'
+        'name': 'support.class.awk'
+      }
+      {
+        'match': '(\\\\[BsSwWy<>\'`])'
+        'name': 'support.class.other.awk'
+      }
     ]
