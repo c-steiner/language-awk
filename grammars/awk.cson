@@ -194,7 +194,7 @@
   'numeric':
     'patterns': [
       {
-        'match': '[[:digit:]]+(\.[[:digit:]]+)*'
+        'match': '\\b([[:digit:]]+)(\.[[:digit:]]+)*'
         'name': 'constant.numeric.awk'
       }
     ]

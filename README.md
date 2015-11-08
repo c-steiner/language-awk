@@ -5,7 +5,7 @@ Adds syntax highlighting to awk scripts in Atom.
 
 
 ## Preview
-![Grammar Preview](https://cloud.githubusercontent.com/assets/15639707/10983790/0f4b5264-8415-11e5-8733-f8f869fe486c.png)
+![Grammar Preview](https://cloud.githubusercontent.com/assets/15639707/11022700/5c13dc68-8665-11e5-80a7-10b7475648b0.png)
 
 
 ## Installation
