@@ -75,6 +75,11 @@
       'beginCaptures':
         '1':
           'name': 'keyword.control.awk'
+          'patterns': [
+            {
+              'include': '#regexp'
+            }
+          ]
         '2':
           'name': 'entity.name.action.begin.awk'
         '3':
