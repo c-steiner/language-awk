@@ -183,7 +183,7 @@
     'patterns': [
       {
         'name': 'variable.other.awk'
-        'match': '[[:alnum:]_]+\\[(.+?)\\]'
+        'match': '[[:alnum:]_]+\\[(.+?)\\]{1,}'
         'captures':
           '1':
             'patterns': [

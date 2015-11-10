@@ -1,3 +1,7 @@
+## 0.1.5
+* Fix matching of array if index is array (e.g. array[arr[i]])
+
+
 ## 0.1.4
 * Improve regex matching.
 * Remove unused code.
