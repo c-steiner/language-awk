@@ -97,7 +97,7 @@
   'builtin_functions':
     'patterns': [
       {
-        'match': '\\b(atan2|cos|exp|int|log|rand|sin|sqrt|srand|asort|asorti|gensub|gsub|index|length|match|patsplit|split|sprintf|strtonum|sub|substr|tolower|toupper|close|fflush|system|mktime|strftime|systime|and|compl|lshift|or|rshift|xor|isarray|bindtextdomain|dcgettext|dcngettext|print)\\b'
+        'match': '\\b(atan2|cos|exp|int|log|rand|sin|sqrt|srand|asort|asorti|gensub|gsub|index|length|match|patsplit|split|sprintf|strtonum|sub|substr|tolower|toupper|close|fflush|system|mktime|strftime|systime|and|compl|lshift|or|rshift|xor|isarray|bindtextdomain|dcgettext|dcngettext|print|printf)\\b'
         'name': 'support.function.builtin.awk'
       }
     ]
