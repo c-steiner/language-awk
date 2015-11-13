@@ -97,6 +97,9 @@
   'builtin_functions':
     'patterns': [
       {
+        'include': '#debug_output'
+      }
+      {
         'match': '\\b(atan2|cos|exp|int|log|rand|sin|sqrt|srand|asort|asorti|gensub|gsub|index|length|match|patsplit|split|sprintf|strtonum|sub|substr|tolower|toupper|close|fflush|system|mktime|strftime|systime|and|compl|lshift|or|rshift|xor|isarray|bindtextdomain|dcgettext|dcngettext|print|printf)\\b'
         'name': 'support.function.builtin.awk'
       }
@@ -269,3 +272,21 @@
         'name': 'support.class.other.awk'
       }
     ]
+  'debug_output':
+    'patterns': [
+      {
+        'name': 'meta.debug.awk'
+        'match': '(printf*)\\s+"(\\[DE*BU*G])(.*?)"(,\\s*)*(".*")*(,\s*)*(.+)*$'
+        'captures':
+          '1':
+            'name': 'support.function.builtin.awk'
+          '2':
+            'name': 'meta.keyword.other.awk'
+          '3':
+            'name': 'markup.raw.awk'
+          '5':
+            'name': 'variable.other.awk'
+          '7':
+            'name': 'variable.other.awk'
+      }
+   ]
