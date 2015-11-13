@@ -1,6 +1,10 @@
+## 0.1.6
+* Add matching for print debugging (tracing).
+* Add missing builtin-function.
+
+
 ## 0.1.5
 * Fix matching of array if index is array (e.g. array[arr[i]])
-* Add matching for print debugging (tracing).
 
 
 ## 0.1.4
