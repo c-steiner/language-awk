@@ -153,7 +153,7 @@
   'function_definition':
     'patterns': [
       {
-        'begin': '^(function)\\s+([[:alnum:]_]+)\\s*\\(([[:alnum:]_]+)\\)?'
+        'begin': '^(function)\\s+([[:alnum:]_]+)\\s*\\(([[:alnum:]_]+)*\\)?'
         'beginCaptures':
           '1':
             'name': 'storage.type.function.awk'

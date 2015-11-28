@@ -1,3 +1,7 @@
+## 0.1.8
+* Fix matching of function declaration (functions without arguments).
+
+
 ## 0.1.7
 * Fix matching of function declaration.
 
