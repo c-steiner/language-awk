@@ -1,3 +1,7 @@
+## 0.1.7
+* Fix matching of function declaration.
+
+
 ## 0.1.6
 * Add matching for print debugging (tracing).
 * Add missing builtin-function.
