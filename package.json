@@ -1,6 +1,6 @@
 {
   "name": "language-awk",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "AWK language support in Atom.",
   "repository": "https://github.com/c-steiner/language-awk.git",
   "keywords": [
