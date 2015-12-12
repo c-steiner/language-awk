@@ -1,3 +1,7 @@
+## 0.1.9
+* Fix long one liner breaks syntax.
+
+
 ## 0.1.8
 * Fix matching of function declaration (functions without arguments).
 
