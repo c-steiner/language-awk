@@ -71,7 +71,7 @@
   'action':
     {
       'name': 'entity.name.action.awk'
-      'begin': '^(BEGIN|END|/.+/) (\{)|^(\{)'
+      'begin': '^(BEGIN|END|/.+/)\\s*(\{)|^(\{)'
       'beginCaptures':
         '1':
           'name': 'keyword.control.awk'

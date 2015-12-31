@@ -1,3 +1,7 @@
+## 0.1.10
+* Fix BEGIN/END block matching.
+
+
 ## 0.1.9
 * Fix long one liner breaks syntax.
 
