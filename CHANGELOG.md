@@ -1,3 +1,7 @@
+## 0.1.11
+* Fix $ constants greater than $9. (thx to Caleb Evans)
+
+
 ## 0.1.10
 * Fix BEGIN/END block matching.
 
