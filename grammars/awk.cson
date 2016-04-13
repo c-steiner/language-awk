@@ -146,7 +146,7 @@
         'name': 'variable.language.awk'
       }
       {
-        'match': '\\$[0-9]'
+        'match': '\\$[0-9]+'
         'name': 'constant.language.awk'
       }
     ]
