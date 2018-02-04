@@ -1,3 +1,7 @@
+## 0.1.13
+* Fix 'end' regex for action pattern. (thx to Bertrand Martin)
+
+
 ## 0.1.12
 * Remove deprecated Shadow DOM selector for Atom 1.13. (thx to John Gardner)
 * Fix CSS.
